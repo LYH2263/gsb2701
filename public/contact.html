@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系合作 | 中华美食</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-section {
+            padding: var(--spacing-xl) 0;
+            background: url('images/pattern-bg.png'); /* Fallback pattern */
+            min-height: 60vh;
+        }
+
+        .contact-card {
+            background: var(--bg-white);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            max-width: 800px;
+            margin: 0 auto;
+            border-top: 4px solid var(--primary-red);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-header h1 {
+            color: var(--primary-red);
+        }
+
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">🥢 中华美食</a>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="cuisine-sichuan.html">川菜</a>
+                <a href="cuisine-cantonese.html">粤菜</a>
+                <a href="cuisine-shandong.html">鲁菜</a>
+                <a href="cuisine-su.html">苏菜</a>
+                <a href="contact.html" style="color: var(--primary-red);">联系合作</a>
+                <a href="login.html" class="btn btn-outline" style="padding: 5px 15px; font-size: 0.9rem; border-width: 1px;">登录</a>
+                <a href="register.html" class="btn btn-primary" style="padding: 5px 15px; font-size: 0.9rem;">注册</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="contact-section">
+        <div class="container">
+            <div class="contact-card">
+                <div class="contact-header">
+                    <h1>联系我们</h1>
+                    <p>商务合作 / 意见反馈 / 投稿建议</p>
+                </div>
+
+                <form id="contactForm" novalidate>
+                    <div class="contact-info-grid">
+                        <div class="form-group">
+                            <label class="form-label">您的姓名 <span style="color:red">*</span></label>
+                            <input type="text" class="form-control" id="contactName" placeholder="怎么称呼您" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">联系方式 <span style="color:red">*</span></label>
+                            <input type="text" class="form-control" id="contactInfo" placeholder="邮箱或电话" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">合作意向 / 主题 <span style="color:red">*</span></label>
+                        <select class="form-control" id="contactSubject">
+                            <option value="business">商务合作</option>
+                            <option value="feedback">意见反馈</option>
+                            <option value="submission">内容投稿</option>
+                            <option value="other">其他</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">详细内容 <span style="color:red">*</span></label>
+                        <textarea class="form-control" id="contactMessage" rows="6" placeholder="请详细描述您的需求..." required></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" style="padding: 12px 40px; font-size: 1.1rem;">提交信息</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Standardized Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>关于我们</h3>
+                    <p style="margin-top: 10px;">致力于弘扬中华美食文化，让世界了解中国味道。提供最正宗的食谱与烹饪技巧。</p>
+                </div>
+                <div>
+                    <h3>联系方式</h3>
+                    <ul style="margin-top: 10px;">
+                        <li>📍 地址：北京市朝阳区美食街88号</li>
+                        <li>📧 邮箱：contact@chinesecuisine.com</li>
+                        <li>📞 电话：010-88888888</li>
+                    </ul>
+                </div>
+                <div>
+                    <!-- Spacer -->
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 中华美食网. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // 1. Check Login Status
+            const userStr = localStorage.getItem('user');
+            if (!userStr) {
+                showModal('提示', '请先登录后再提交表单', 'warning');
+                return;
+            }
+
+            // 2. Client-side Validation using main.js helper
+            let isValid = true;
+            isValid = validateRequired('#contactName', '请输入您的姓名') && isValid;
+            isValid = validateRequired('#contactInfo', '请输入联系方式') && isValid;
+            isValid = validateRequired('#contactMessage', '请输入详细内容') && isValid;
+
+            if (isValid) {
+                // Determine user
+                const user = JSON.parse(userStr);
+                
+                // Simulate Submission
+                // In a real app, we would fetch('/api/contact', ...) here
+                
+                const btn = this.querySelector('button[type="submit"]');
+                const originalText = btn.textContent;
+                btn.textContent = '提交中...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    showModal('提交成功', `感谢您的反馈，${user.username}！我们会尽快与您联系。`, 'success');
+                    document.getElementById('contactForm').reset();
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

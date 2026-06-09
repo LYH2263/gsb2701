@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奶汤蒲菜食谱 | 中华美食</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .recipe-header {
+            background-color: #f9f9f9;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .recipe-title {
+            color: var(--primary-red);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .recipe-image-container {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .recipe-content {
+            background: var(--bg-white);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .ingredients-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .ingredients-list li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cooking-steps {
+            counter-reset: step;
+        }
+
+        .step-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 20px;
+        }
+
+        .step-item::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 35px;
+            height: 35px;
+            background: var(--primary-red);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">🥢 中华美食</a>
+            <div class="nav-links">
+                <a href="dishes-shandong.html">返回菜单</a>
+                <a href="index.html">首页</a>
+                <a href="contact.html">联系合作</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="recipe-header">
+        <div class="container">
+            <h1 class="recipe-title">奶汤蒲菜</h1>
+            <p>Cattail Soup - 济南名菜，鲜香爽口</p>
+        </div>
+    </header>
+
+    <main class="container" style="padding-bottom: 60px;">
+        <div class="recipe-image-container">
+            <img src="images/dish_cattail_soup.png" alt="奶汤蒲菜" class="recipe-image">
+        </div>
+
+        <div class="recipe-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 style="color: var(--primary-red); border-bottom: 2px solid var(--primary-gold); padding-bottom: 10px; margin-bottom: 20px;">食材准备</h2>
+                    <ul class="ingredients-list">
+                        <li><strong>主料：</strong> 大明湖蒲菜 250g</li>
+                        <li><strong>配料：</strong> 火腿片、冬笋片 适量</li>
+                        <li><strong>底汤：</strong> 浓白汤 (骨头汤/鸡汤) 500ml</li>
+                        <li><strong>调料：</strong> 姜米、葱段 适量</li>
+                        <li><strong>调料：</strong> 盐、白胡椒粉 适量</li>
+                        <li><strong>油类：</strong> 猪油 (更香) 适量</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <h2 style="color: var(--primary-red); border-bottom: 2px solid var(--primary-gold); padding-bottom: 10px; margin-bottom: 20px;">烹饪步骤</h2>
+                <div class="cooking-steps">
+                    <div class="step-item">
+                        <h3>处理蒲菜</h3>
+                        <p>选取蒲菜的鲜嫩茎部，切成5厘米长的段。用沸水焯烫一下，去除苦涩味，保持翠绿。</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>煸炒底料</h3>
+                        <p>锅中放入猪油，熔化后下入葱段、姜米爆香。猪油能增加汤汁的醇厚感和奶白色。</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>煨煮</h3>
+                        <p>倒入浓白汤，大火烧开。下入蒲菜段、火腿片和冬笋片。这些配料能大大提升汤头的鲜美度。</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>调味</h3>
+                        <p>中小火煨煮3-5分钟，至蒲菜变软透明。加入盐、少许白胡椒粉调味。注意白胡椒能提鲜但不应过量。</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>出锅</h3>
+                        <p>待汤汁变得浓绸乳白，淋入少许葱油，装盆即可。汤味醇厚，蒲菜脆嫩，清香四溢。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>关于我们</h3>
+                    <p style="margin-top: 10px;">致力于弘扬中华美食文化，让世界了解中国味道。提供最正宗的食谱与烹饪技巧。</p>
+                </div>
+                <div>
+                    <h3>联系方式</h3>
+                    <ul style="margin-top: 10px;">
+                        <li>📍 地址：北京市朝阳区美食街88号</li>
+                        <li>📧 邮箱：contact@chinesecuisine.com</li>
+                        <li>📞 电话：010-88888888</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 中华美食网. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

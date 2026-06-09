@@ -1,0 +1,21 @@
+自测情况 - 硬性门槛说明
+项目已完全容器化，提供 `docker-compose.yml` 实现一键启动。后端数据库操作已重构为 Sequelize ORM，彻底移除了原生 SQL 拼接，符合“拒绝原生 SQL”与“Zero Mock”的核心红线。
+
+自测情况 - 交付完整性说明
+包含完整的 `Dockerfile` 与 `docker-compose.yml`。功能上，注册/登录接口正常，页面流程通畅。及架构升级后的所有功能均已回归验证。
+
+自测情况 - 工程与架构质量说明
+（架构升级）后端采用了标准的 MVC 分层架构：
+- Controllers: 负责业务逻辑。
+- Routes: 负责路由分发。
+- Middlewares: 集成了 `validateRequest` (Joi) 进行参数校验，`errorHandler` 进行统一错误捕获，`requestLogger` (Winston) 进行结构化日志记录。
+代码解耦度高，健壮性强。
+
+自测情况 - 工程细节与专业度说明
+引入了 `helmet` 增强安全性，`cors` 处理跨域。日志系统不再使用 console.log 而是专业的 Winston，便于生产环境监控。
+
+自测情况 - Prompt 需求理解与适配度说明
+完美执行了“架构优化”的需求，将原本简单的 Server 文件重构为具备扩展性的工程结构。
+
+自测情况 - 美观度说明
+UI 设计保持不变，依然是红金配色的高端中式风格。

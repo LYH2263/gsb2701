@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 | 中华美食</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .auth-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--spacing-xl) 0;
+        }
+
+        .auth-card {
+            background: var(--bg-white);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--primary-gold);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h2 {
+            color: var(--primary-gold); /* Gold for Register */
+            font-size: 1.8rem;
+            color: #b7950b; /* Darker gold for text */
+        }
+        
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .form-footer a {
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">🥢 中华美食</a>
+            <div class="nav-links">
+                <a href="index.html">返回首页</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>注册会员</h2>
+                <p>加入我们，分享您的美食心得</p>
+            </div>
+            
+            <form id="registerForm" novalidate>
+                <div class="form-group">
+                    <label class="form-label">用户名</label>
+                    <input type="text" class="form-control" id="regUsername" placeholder="设置用户名" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">电子邮箱</label>
+                    <input type="email" class="form-control" id="regEmail" placeholder="example@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">设置密码</label>
+                    <input type="password" class="form-control" id="regPassword" placeholder="请设置6位以上密码" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">确认密码</label>
+                    <input type="password" class="form-control" id="regConfirmPassword" placeholder="再次输入密码" required>
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="agree" required>
+                    <label for="agree" style="font-size: 0.9rem; color: #666; cursor: pointer;">我已阅读并同意《用户协议》</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px; background-color: var(--primary-gold); color: #fff;">立即注册</button>
+            </form>
+
+            <div class="form-footer">
+                已有账号？ <a href="login.html">去登录</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>关于我们</h3>
+                    <p style="margin-top: 10px;">致力于弘扬中华美食文化，让世界了解中国味道。提供最正宗的食谱与烹饪技巧。</p>
+                </div>
+                <div>
+                    <h3>联系方式</h3>
+                    <ul style="margin-top: 10px;">
+                        <li>📍 地址：北京市朝阳区美食街88号</li>
+                        <li>📧 邮箱：contact@chinesecuisine.com</li>
+                        <li>📞 电话：010-88888888</li>
+                    </ul>
+                </div>
+                <div>
+                    <!-- Spacer -->
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 中华美食网. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic Validation
+            let isValid = true;
+            isValid = validateRequired('#regUsername', '用户名不能为空') && isValid;
+            
+            // Email validation (simple regex)
+            const emailInput = document.getElementById('regEmail');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value)) {
+                // Manually trigger error style (simplifying use of validateRequired for now, custom logic here)
+                emailInput.classList.add('error');
+                let err = emailInput.parentElement.querySelector('.error-message');
+                if(!err) {
+                    err = document.createElement('div');
+                    err.className = 'error-message';
+                    emailInput.parentElement.appendChild(err);
+                }
+                err.textContent = '请输入有效的邮箱格式';
+                isValid = false;
+            } else {
+                emailInput.classList.remove('error');
+                const err = emailInput.parentElement.querySelector('.error-message');
+                if(err) err.remove();
+            }
+
+            isValid = validateRequired('#regPassword', '密码不能为空') && isValid;
+            isValid = validateRequired('#regConfirmPassword', '请确认密码') && isValid;
+
+            const pwd = document.getElementById('regPassword').value;
+            const pwd2 = document.getElementById('regConfirmPassword').value;
+
+            if (pwd && pwd2 && pwd !== pwd2) {
+                const confirmInput = document.getElementById('regConfirmPassword');
+                confirmInput.classList.add('error');
+                let err = confirmInput.parentElement.querySelector('.error-message');
+                if(!err) {
+                     err = document.createElement('div');
+                     err.className = 'error-message';
+                     confirmInput.parentElement.appendChild(err);
+                }
+                err.textContent = '两次输入的密码不一致';
+                isValid = false;
+            }
+
+            if (!document.getElementById('agree').checked) {
+                showModal('提示', '请先同意用户协议', 'info');
+                return;
+            }
+
+            if (isValid) {
+                const username = document.getElementById('regUsername').value;
+                const email = document.getElementById('regEmail').value;
+                const password = document.getElementById('regPassword').value;
+
+                fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showModal('注册成功', '欢迎加入中华美食网！请登录。', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 2000);
+                    } else {
+                        showModal('注册失败', data.message || '注册过程中出现错误', 'error');
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    showModal('系统错误', '无法连接到服务器，请稍后重试', 'error');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
