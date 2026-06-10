@@ -3,7 +3,10 @@ services:
     build: .
     ports:
       - "3000:3000"
+    # 把宿主机项目根目录挂到容器 /host_data，
+    # 让容器内 /host_data/database.sqlite 与本地 npm start 写入的根目录 database.sqlite 同一文件，
+    # 避免直接 bind-mount 单个不存在文件时被 Docker 创建为目录的问题。
     volumes:
-      - ./database.sqlite:/app/database.sqlite
+      - ./:/host_data
     environment:
-      - DB_PATH=/app/database.sqlite
+      - DB_PATH=/host_data/database.sqlite

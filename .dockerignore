@@ -1,4 +1,4 @@
-# 依赖（容器内重新安装）
+# 依赖（容器内重新安装，避免把宿主机的原生模块带进 Linux 镜像）
 node_modules
 npm-debug.log
 
@@ -6,9 +6,8 @@ npm-debug.log
 .env
 .env.local
 
-# 数据库及运行时文件
+# 数据库及运行时文件（通过 volume 持久化到宿主机根目录 database.sqlite）
 database.sqlite
-*.sqlite
 *.sqlite-journal
 *.sqlite-wal
 *.sqlite-shm
@@ -37,3 +36,6 @@ self_test.txt
 # 对话记录与题目
 对话
 题目.md
+
+# 备份/临时目录
+webtemp
