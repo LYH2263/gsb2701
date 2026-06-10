@@ -30,10 +30,15 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, '../public')));
 
 // Database Sync
-sequelize.sync().then(() => {
+sequelize.sync({ alter: true }).then(() => {
     logger.info('Database synced successfully.');
-}).catch(err => {
-    logger.error('Error syncing database:', err);
+}).catch((alterErr) => {
+    logger.warn('Alter sync failed, forcing full sync:', alterErr.message);
+    sequelize.sync({ force: true }).then(() => {
+        logger.info('Database force synced successfully.');
+    }).catch((forceErr) => {
+        logger.error('Error syncing database:', forceErr);
+    });
 });
 
 // Routes
