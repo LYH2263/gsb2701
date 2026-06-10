@@ -4,6 +4,6 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./database.sqlite:/app/database.sqlite
+      - ./:/app/host
     environment:
-      - DB_PATH=/app/database.sqlite
+      - DB_PATH=/app/host/database.sqlite
