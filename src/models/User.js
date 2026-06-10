@@ -15,7 +15,13 @@ const User = sequelize.define('User', {
             isEmail: true
         }
     },
+    // 加盐哈希后的口令（pbkdf2-sha512 hex）
     password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    // 每用户独立的随机盐（hex）
+    salt: {
         type: DataTypes.STRING,
         allowNull: false
     }
